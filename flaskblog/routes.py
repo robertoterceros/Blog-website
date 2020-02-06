@@ -1,11 +1,12 @@
-from flask import Flask, flash
+from flask import flash
 from flask import render_template, redirect
 from flask import url_for
-from forms import RegistrationForm, LoginForm
 
-app = Flask(__name__)
-# To protect coockies
-app.config['SECRET_KEY'] = 'eb9f68411f660544845fb2043eaf62b5'
+from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog.models import User, Post
+
+from flaskblog import app
+
 
 posts = [
     {
@@ -51,6 +52,3 @@ def login():
         else:
             flash('Login unsucessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
-
-if __name__=='__main__':
-    app.run(debug=True)
